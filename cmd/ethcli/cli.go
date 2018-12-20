@@ -67,8 +67,13 @@ func init() {
 	for {
 		_ini, err := goini.LoadInheritedINI(PWD() + cliCfg) // goini.New()
 		if err != nil {
-			fmt.Printf("Failed to parse config: %v\n\n", err.Error())
-			break
+			//fmt.Printf("Failed to parse config: %v\n\n", err.Error())
+			//break
+			_ini, err = goini.LoadInheritedINI(PWD() + "cli.ini")
+			if err != nil {
+				fmt.Printf("Failed to parse config: %v\n\n", err.Error())
+				break
+			}
 		}
 		ini = _ini
 		url, ok := ini.SectionGet(api, rpc) // ini.Get(rpc)
